@@ -1,0 +1,27 @@
+--- logs:
+
+
+
+
+---------
+
+
+--- make topic:
+sudo docker exec -i kafka kafka-topics --create --topic nifi-test --topic-id id-1 --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
+
+sudo docker exec -i kafka kafka-topics --list --bootstrap-server localhost:9092
+
+sudo docker exec -i kafka kafka-topics --describe --topic nifi-test --exclude-internal --bootstrap-server localhost:9092
+>>out:
+Topic: nifi-test	TopicId: Le5WkfQjT_aPzJpwKqz-zw	PartitionCount: 1	ReplicationFactor: 1	Configs: 
+	Topic: nifi-test	Partition: 0	Leader: 1	Replicas: 1	Isr: 1
+
+sudo docker exec -i kafka kafka-console-producer --topic nifi-test --bootstrap-server localhost:9092
+
+sudo docker exec -i kafka kafka-console-consumer --topic nifi-test --from-beginning --bootstrap-server localhost:9092
+
+sudo docker exec -i kafka kafka-console-consumer --topic nifi-test --group nifi-test-1 --bootstrap-server localhost:9092
+---------
+
+
+
